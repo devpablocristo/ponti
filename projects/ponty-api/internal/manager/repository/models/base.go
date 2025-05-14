@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/manager/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/manager/usecases/domain"
 )
 
 // Manager representa el modelo GORM para un manager.

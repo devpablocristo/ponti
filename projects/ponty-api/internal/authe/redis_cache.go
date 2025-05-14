@@ -7,11 +7,11 @@ import (
 
 	redis0 "github.com/go-redis/redis/v8"
 
-	redis "github.com/alphacodinggroup/euxcel-backend/pkg/databases/cache/redis/v8"
-	types "github.com/alphacodinggroup/euxcel-backend/pkg/types"
+	redis "github.com/alphacodinggroup/ponti-backend/pkg/databases/cache/redis/v8"
+	types "github.com/alphacodinggroup/ponti-backend/pkg/types"
 
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/redis/dto"
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/redis/dto"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/usecases/domain"
 )
 
 type cache struct {

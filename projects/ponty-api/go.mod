@@ -1,9 +1,9 @@
-module github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api
+module github.com/alphacodinggroup/ponti-backend/projects/ponti-api
 
 go 1.23.4
 
 require (
-	github.com/alphacodinggroup/euxcel-backend/pkg v0.0.0
+	github.com/alphacodinggroup/ponti-backend/pkg v0.0.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang-jwt/jwt/v5 v5.2.1
@@ -80,4 +80,4 @@ require (
 	gorm.io/driver/sqlite v1.5.7 // indirect
 )
 
-replace github.com/alphacodinggroup/euxcel-backend/pkg => ../../pkg
+replace github.com/alphacodinggroup/ponti-backend/pkg => ../../pkg

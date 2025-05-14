@@ -4,14 +4,14 @@ package wire
 import (
 	"errors"
 
-	jwt "github.com/alphacodinggroup/euxcel-backend/pkg/authe/jwt/v5"
-	redis "github.com/alphacodinggroup/euxcel-backend/pkg/databases/cache/redis/v8"
-	resty "github.com/alphacodinggroup/euxcel-backend/pkg/http/clients/resty"
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	ginsrv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
+	jwt "github.com/alphacodinggroup/ponti-backend/pkg/authe/jwt/v5"
+	redis "github.com/alphacodinggroup/ponti-backend/pkg/databases/cache/redis/v8"
+	resty "github.com/alphacodinggroup/ponti-backend/pkg/http/clients/resty"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	ginsrv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
 
-	authe "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe"
-	config "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/config"
+	authe "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe"
+	config "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/config"
 )
 
 // ProvideAutheCache proporciona una implementación de authe.Cache utilizando Redis.

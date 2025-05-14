@@ -1,10 +1,10 @@
 package domain
 
 import (
-	customerdom "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/customer/usecases/domain"
-	fieldom "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/field/usecases/domain"
-	investordom "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/investor/usecases/domain"
-	managerdom "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/manager/usecases/domain"
+	customerdom "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/customer/usecases/domain"
+	fieldom "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/field/usecases/domain"
+	investordom "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/investor/usecases/domain"
+	managerdom "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/manager/usecases/domain"
 )
 
 type Project struct {

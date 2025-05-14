@@ -6,12 +6,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	types "github.com/alphacodinggroup/euxcel-backend/pkg/types"
-	utils "github.com/alphacodinggroup/euxcel-backend/pkg/utils"
+	types "github.com/alphacodinggroup/ponti-backend/pkg/types"
+	utils "github.com/alphacodinggroup/ponti-backend/pkg/utils"
 
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	gsv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
-	dto "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/customer/handler/dto"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	gsv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
+	dto "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/customer/handler/dto"
 )
 
 // Handler encapsula todas las dependencias para el HTTP handler de Customer.

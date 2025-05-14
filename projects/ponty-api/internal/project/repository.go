@@ -7,10 +7,10 @@ import (
 
 	gorm0 "gorm.io/gorm"
 
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
-	pkgtypes "github.com/alphacodinggroup/euxcel-backend/pkg/types"
-	models "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/project/repository/models"
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/project/usecases/domain"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
+	pkgtypes "github.com/alphacodinggroup/ponti-backend/pkg/types"
+	models "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/project/repository/models"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/project/usecases/domain"
 )
 
 type repository struct {

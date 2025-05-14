@@ -2,7 +2,7 @@
 package domain
 
 import (
-	lotdom "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/lot/usecases/domain"
+	lotdom "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/lot/usecases/domain"
 )
 
 type Field struct {

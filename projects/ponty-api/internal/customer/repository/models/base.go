@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/customer/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/customer/usecases/domain"
 )
 
 // Customer representa el modelo GORM para un customer.

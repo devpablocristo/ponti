@@ -3,7 +3,7 @@ package crop
 import (
 	"context"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/crop/usecases/domain"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/crop/usecases/domain"
 )
 
 // UseCases defines business operations for Crop.

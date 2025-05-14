@@ -3,7 +3,7 @@ package dto
 import (
 	"time"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/investor/usecases/domain"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/investor/usecases/domain"
 )
 
 // Investor is the DTO for a specific investor.

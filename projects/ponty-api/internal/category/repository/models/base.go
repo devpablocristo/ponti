@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/category/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/category/usecases/domain"
 )
 
 // Category representa el modelo en la base de datos para una categoría.

@@ -1,7 +1,7 @@
 package domain
 
 import (
-	cropdom "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/crop/usecases/domain"
+	cropdom "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/crop/usecases/domain"
 )
 
 // Lot represents a piece of land within a field.

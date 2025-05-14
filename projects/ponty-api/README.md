@@ -48,7 +48,7 @@ El archivo `Makefile` permite ejecutar rápidamente tareas de compilación, ejec
 | `make dev-down`          | Detiene los servicios en modo desarrollo y elimina contenedores huérfanos.                             |
 | `make dev-logs`          | Muestra los logs en tiempo real de los servicios en modo desarrollo.                                    |
 
-> 💡 **Nota:** El perfil de desarrollo (`euxcel-api`) está definido en `docker-compose.dev.yml`.
+> 💡 **Nota:** El perfil de desarrollo (`ponti-api`) está definido en `docker-compose.dev.yml`.
 
 ---
 
@@ -60,7 +60,7 @@ El archivo `Makefile` permite ejecutar rápidamente tareas de compilación, ejec
 | `make stg-down`          | Detiene los servicios en modo staging y elimina contenedores huérfanos.                                |
 | `make stg-logs`          | Muestra los logs en tiempo real de los servicios en modo staging.                                       |
 
-> 💡 **Nota:** El perfil de staging (`euxcel-api`) está definido en `docker-compose.stg.yml`.
+> 💡 **Nota:** El perfil de staging (`ponti-api`) está definido en `docker-compose.stg.yml`.
 
 ---
 

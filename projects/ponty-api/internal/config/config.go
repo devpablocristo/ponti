@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	envs "github.com/alphacodinggroup/euxcel-backend/pkg/config/godotenv"
+	envs "github.com/alphacodinggroup/ponti-backend/pkg/config/godotenv"
 )
 
 // AppConfig contiene la configuración de la aplicación.
@@ -32,7 +32,7 @@ type configLoader struct {
 // NewConfigLoader carga las configuraciones desde el archivo .env y las asigna a la estructura Config.
 func NewConfigLoader() (Loader, error) {
 	// Ruta al archivo .env
-	envPath := "/projects/euxcel-api/.env"
+	envPath := "/projects/ponti-api/.env"
 
 	// Cargar el archivo .env
 	if err := envs.LoadConfig(envPath); err != nil {
@@ -41,7 +41,7 @@ func NewConfigLoader() (Loader, error) {
 
 	// Parsear variables de entorno para AppConfig
 	appConfig := AppConfig{
-		AppName:     getEnv("APP_NAME", "euxcel-api"),
+		AppName:     getEnv("APP_NAME", "ponti-api"),
 		Version:     getEnv("APP_VERSION", "1.0"),
 		Environment: getEnv("APP_ENV", "dev"),
 		APIVersion:  getEnv("API_VERSION", "v1"),

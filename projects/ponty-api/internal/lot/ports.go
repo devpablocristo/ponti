@@ -3,7 +3,7 @@ package lot
 import (
 	"context"
 
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/lot/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/lot/usecases/domain"
 )
 
 type UseCases interface {

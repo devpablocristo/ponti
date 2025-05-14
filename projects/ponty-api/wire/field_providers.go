@@ -3,18 +3,18 @@ package wire
 import (
 	"errors"
 
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	ginsrv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	ginsrv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
 
-	field "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/field"
-	lot "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/lot"
+	field "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/field"
+	lot "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/lot"
 
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	ginsrv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	ginsrv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
 
-	field "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/field"
+	field "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/field"
 )
 
 func ProvideFieldRepository(repo gorm.Repository) (field.Repository, error) {

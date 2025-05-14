@@ -1,8 +1,8 @@
 package dto
 
 import (
-	types "github.com/alphacodinggroup/euxcel-backend/pkg/types"
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/user/usecases/domain"
+	types "github.com/alphacodinggroup/ponti-backend/pkg/types"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/user/usecases/domain"
 )
 
 type User struct {

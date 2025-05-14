@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/usecases/domain"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/usecases/domain"
 )
 
 type useCases struct {

@@ -3,9 +3,9 @@ package dto
 import (
 	"errors"
 
-	smtp "github.com/alphacodinggroup/euxcel-backend/pkg/notification/smtp"
+	smtp "github.com/alphacodinggroup/ponti-backend/pkg/notification/smtp"
 
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/notification/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/notification/usecases/domain"
 )
 
 type Email struct {

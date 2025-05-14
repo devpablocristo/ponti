@@ -3,7 +3,7 @@ package category
 import (
 	"context"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/category/usecases/domain"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/category/usecases/domain"
 )
 
 type useCases struct {

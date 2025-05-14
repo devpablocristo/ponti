@@ -3,7 +3,7 @@ package project
 import (
 	"context"
 
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/project/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/project/usecases/domain"
 )
 
 // UseCases defines business operations for Project.

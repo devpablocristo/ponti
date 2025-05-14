@@ -3,8 +3,8 @@ package wire
 import (
 	"github.com/gin-gonic/gin"
 
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	utils "github.com/alphacodinggroup/euxcel-backend/pkg/utils"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	utils "github.com/alphacodinggroup/ponti-backend/pkg/utils"
 )
 
 func ProvideJwtMiddleware() (gin.HandlerFunc, error) {

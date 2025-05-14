@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/field/usecases/domain"
-	lot "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/lot"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/field/usecases/domain"
+	lot "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/lot"
 )
 
 type useCases struct {

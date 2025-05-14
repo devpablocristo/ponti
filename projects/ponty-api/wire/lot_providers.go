@@ -3,11 +3,11 @@ package wire
 import (
 	"errors"
 
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	ginsrv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	ginsrv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
 
-	lot "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/lot"
+	lot "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/lot"
 )
 
 func ProvideLotRepository(repo gorm.Repository) (lot.Repository, error) {

@@ -7,11 +7,11 @@ import (
 
 	jwt0 "github.com/golang-jwt/jwt/v5"
 
-	jwt "github.com/alphacodinggroup/euxcel-backend/pkg/authe/jwt/v5"
+	jwt "github.com/alphacodinggroup/ponti-backend/pkg/authe/jwt/v5"
 
-	dto "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/jwt-service/dto"
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/usecases/domain"
-	config "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/config"
+	dto "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/jwt-service/dto"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/usecases/domain"
+	config "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/config"
 )
 
 type jwtService struct {

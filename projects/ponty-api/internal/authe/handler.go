@@ -5,11 +5,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	gsv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
-	types "github.com/alphacodinggroup/euxcel-backend/pkg/types"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	gsv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
+	types "github.com/alphacodinggroup/ponti-backend/pkg/types"
 
-	dto "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/handler/dto"
+	dto "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/handler/dto"
 )
 
 type Handler struct {

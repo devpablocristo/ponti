@@ -138,16 +138,16 @@ stg-logs:
 
 # # Backend profile targets for dev
 # dev-build:
-# 	@$(MAKE) docker-dev-build PROFILE=euxcel-api
+# 	@$(MAKE) docker-dev-build PROFILE=ponti-api
 
 # dev-up:
-# 	@$(MAKE) docker-dev-up PROFILE=euxcel-api
+# 	@$(MAKE) docker-dev-up PROFILE=ponti-api
 
 # dev-down:
-# 	@$(MAKE) docker-dev-down PROFILE=euxcel-api
+# 	@$(MAKE) docker-dev-down PROFILE=ponti-api
 
 # dev-logs:
-# 	@$(MAKE) docker-dev-logs PROFILE=euxcel-api
+# 	@$(MAKE) docker-dev-logs PROFILE=ponti-api
 
 # # ------------------------------------------------------------------------
 # # Staging Docker commands
@@ -173,13 +173,13 @@ stg-logs:
 
 # # Backend profile targets for staging
 # stg-build:
-# 	@$(MAKE) docker-stg-build PROFILE=euxcel-api
+# 	@$(MAKE) docker-stg-build PROFILE=ponti-api
 
 # stg-up:
-# 	@$(MAKE) docker-stg-up PROFILE=euxcel-api
+# 	@$(MAKE) docker-stg-up PROFILE=ponti-api
 
 # stg-down:
-# 	@$(MAKE) docker-stg-down PROFILE=euxcel-api
+# 	@$(MAKE) docker-stg-down PROFILE=ponti-api
 
 # stg-logs:
-# 	@$(MAKE) docker-stg-logs PROFILE=euxcel-api
+# 	@$(MAKE) docker-stg-logs PROFILE=ponti-api

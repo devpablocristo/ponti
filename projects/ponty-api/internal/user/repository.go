@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
 	"github.com/google/uuid"
 
-	models "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/user/repository/models"
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/user/usecases/domain"
+	models "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/user/repository/models"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/user/usecases/domain"
 )
 
 type repository struct {

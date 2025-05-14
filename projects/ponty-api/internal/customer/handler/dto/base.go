@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/customer/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/customer/usecases/domain"
 )
 
 // Customer es el DTO para un customer específico.

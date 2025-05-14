@@ -4,7 +4,7 @@ package field
 import (
 	"context"
 
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/field/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/field/usecases/domain"
 )
 
 // UseCases defines business operations for Field.

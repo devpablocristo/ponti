@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/macrocategory/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/macrocategory/usecases/domain"
 )
 
 // MacroCategory represents the database model for a macro category.

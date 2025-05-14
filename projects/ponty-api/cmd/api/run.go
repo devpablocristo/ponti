@@ -7,21 +7,21 @@ import (
 	"log"
 	"time"
 
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
 
-	cropmodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/crop/repository/models"
-	customermodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/customer/repository/models"
-	fieldmodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/field/repository/models"
-	investormodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/investor/repository/models"
-	itemmodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/item/repository/models"
-	lotmodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/lot/repository/models"
-	macrocategorymodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/macrocategory/repository/models"
-	personmodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/person/repository/models"
-	projectmodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/project/repository/models"
-	suppliermodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/supplier/repository/models"
-	usermodels "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/user/repository/models"
+	cropmodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/crop/repository/models"
+	customermodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/customer/repository/models"
+	fieldmodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/field/repository/models"
+	investormodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/investor/repository/models"
+	itemmodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/item/repository/models"
+	lotmodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/lot/repository/models"
+	macrocategorymodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/macrocategory/repository/models"
+	personmodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/person/repository/models"
+	projectmodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/project/repository/models"
+	suppliermodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/supplier/repository/models"
+	usermodels "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/user/repository/models"
 
-	wire "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/wire"
+	wire "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/wire"
 )
 
 // RunHttpServer registers routes in the Gin router and starts the HTTP server.

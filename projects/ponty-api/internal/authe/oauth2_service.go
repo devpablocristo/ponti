@@ -4,7 +4,7 @@ package authe
 // 	"fmt"
 // 	"net/http"
 
-// 	oauth2 "github.com/alphacodinggroup/euxcel-backend/pkg/authe/oauth2"
+// 	oauth2 "github.com/alphacodinggroup/ponti-backend/pkg/authe/oauth2"
 // )
 
 // type oAuth2Service struct {

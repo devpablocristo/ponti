@@ -3,11 +3,11 @@ package wire
 import (
 	"errors"
 
-	mdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/gin"
-	gin "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
-	smtp "github.com/alphacodinggroup/euxcel-backend/pkg/notification/smtp"
+	mdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/gin"
+	gin "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
+	smtp "github.com/alphacodinggroup/ponti-backend/pkg/notification/smtp"
 
-	notification "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/notification"
+	notification "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/notification"
 )
 
 func ProvideNotificationSmtpService(smtp smtp.Service) (notification.SmtpService, error) {

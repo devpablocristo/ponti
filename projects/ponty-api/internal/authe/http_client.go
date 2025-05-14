@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	resty "github.com/alphacodinggroup/euxcel-backend/pkg/http/clients/resty"
+	resty "github.com/alphacodinggroup/ponti-backend/pkg/http/clients/resty"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/authe/usecases/domain"
-	config "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/config"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/authe/usecases/domain"
+	config "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/config"
 )
 
 type httpClient struct {

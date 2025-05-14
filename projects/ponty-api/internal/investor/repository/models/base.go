@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/investor/usecases/domain"
+	"github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/investor/usecases/domain"
 )
 
 // Investor represents the GORM model for an investor.

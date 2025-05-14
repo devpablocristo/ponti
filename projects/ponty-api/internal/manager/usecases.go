@@ -3,7 +3,7 @@ package manager
 import (
 	"context"
 
-	domain "github.com/alphacodinggroup/euxcel-backend/projects/euxcel-api/internal/manager/usecases/domain"
+	domain "github.com/alphacodinggroup/ponti-backend/projects/ponti-api/internal/manager/usecases/domain"
 )
 
 type useCases struct {

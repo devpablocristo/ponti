@@ -3,14 +3,14 @@ package wire
 import (
 	"fmt"
 
-	jwt "github.com/alphacodinggroup/euxcel-backend/pkg/authe/jwt/v5"
-	rdch "github.com/alphacodinggroup/euxcel-backend/pkg/databases/cache/redis/v8"
-	gorm "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/gorm"
-	pgdb "github.com/alphacodinggroup/euxcel-backend/pkg/databases/sql/postgresql/pgxpool"
-	resty "github.com/alphacodinggroup/euxcel-backend/pkg/http/clients/resty"
-	restymdw "github.com/alphacodinggroup/euxcel-backend/pkg/http/middlewares/resty"
-	ginsrv "github.com/alphacodinggroup/euxcel-backend/pkg/http/servers/gin"
-	ssmtp "github.com/alphacodinggroup/euxcel-backend/pkg/notification/smtp"
+	jwt "github.com/alphacodinggroup/ponti-backend/pkg/authe/jwt/v5"
+	rdch "github.com/alphacodinggroup/ponti-backend/pkg/databases/cache/redis/v8"
+	gorm "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/gorm"
+	pgdb "github.com/alphacodinggroup/ponti-backend/pkg/databases/sql/postgresql/pgxpool"
+	resty "github.com/alphacodinggroup/ponti-backend/pkg/http/clients/resty"
+	restymdw "github.com/alphacodinggroup/ponti-backend/pkg/http/middlewares/resty"
+	ginsrv "github.com/alphacodinggroup/ponti-backend/pkg/http/servers/gin"
+	ssmtp "github.com/alphacodinggroup/ponti-backend/pkg/notification/smtp"
 )
 
 func ProvideGormRepository() (gorm.Repository, error) {
