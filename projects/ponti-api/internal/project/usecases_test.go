@@ -106,7 +106,7 @@ func TestCreateProject(t *testing.T) {
 						}},
 					}).
 					Return(int64(40), nil)
-				// 5) Persist project
+				// Persist project
 				f.repo.EXPECT().
 					CreateProject(gomock.Any(), gomock.Any()).
 					Return(int64(99), nil)
