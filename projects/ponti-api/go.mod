@@ -5,11 +5,13 @@ go 1.23.4
 require (
 	github.com/alphacodinggroup/ponti-backend/pkg v0.0.0
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-playground/assert/v2 v2.2.0
 	github.com/golang/mock v1.6.0
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.6.0
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/lib/pq v1.10.9
+	github.com/stretchr/testify v1.9.0
 	gorm.io/gorm v1.25.10
 )
 
@@ -61,7 +63,6 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
-	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	go-micro.dev/v4 v4.11.0 // indirect
