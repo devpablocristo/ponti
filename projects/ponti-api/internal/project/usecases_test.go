@@ -23,19 +23,39 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+type fields struct {
+	repo *mocks.MockRepository
+	cu   *customer.MockUseCases
+	ma   *manager.MockUseCases
+	in   *investor.MockUseCases
+	fu   *field.MockUseCases
+	lo   *lot.MockUseCases
+	uc   UseCases
+}
+
+func setupMocks(ctrl *gomock.Controller) fields {
+	repo := mocks.NewMockRepository(ctrl)
+	cu := customer.NewMockUseCases(ctrl)
+	ma := manager.NewMockUseCases(ctrl)
+	in := investor.NewMockUseCases(ctrl)
+	fu := field.NewMockUseCases(ctrl)
+	lo := lot.NewMockUseCases(ctrl)
+
+	return fields{
+		repo: repo,
+		cu:   cu,
+		ma:   ma,
+		in:   in,
+		fu:   fu,
+		lo:   lo,
+		uc:   NewUseCases(repo, cu, ma, in, fu, lo),
+	}
+}
+
 func TestCreateProject(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	type fields struct {
-		repo *mocks.MockRepository
-		cu   *customer.MockUseCases
-		ma   *manager.MockUseCases
-		in   *investor.MockUseCases
-		fu   *field.MockUseCases
-		lo   *lot.MockUseCases
-		uc   UseCases
-	}
 	type args struct {
 		ctx context.Context
 		p   *domain.Project
@@ -111,7 +131,7 @@ func TestCreateProject(t *testing.T) {
 					CreateProject(gomock.Any(), gomock.Any()).
 					Return(int64(99), nil)
 			},
-			args:   args{ctx: context.TODO(), p: base},
+			args:   args{ctx: context.Background(), p: base},
 			wantID: 99,
 		},
 		{
@@ -135,7 +155,7 @@ func TestCreateProject(t *testing.T) {
 					DeleteCustomer(gomock.Any(), int64(10)).
 					Return(nil)
 			},
-			args: args{ctx: context.TODO(), p: &domain.Project{
+			args: args{ctx: context.Background(), p: &domain.Project{
 				ID:   99,
 				Name: "Project X",
 				Customer: customerdom.Customer{
@@ -167,31 +187,19 @@ func TestCreateProject(t *testing.T) {
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			repoMock := mocks.NewMockRepository(ctrl)
-			cuMock := customer.NewMockUseCases(ctrl)
-			maMock := manager.NewMockUseCases(ctrl)
-			inMock := investor.NewMockUseCases(ctrl)
-			fuMock := field.NewMockUseCases(ctrl)
-			loMock := lot.NewMockUseCases(ctrl)
+			t.Parallel()
 
-			f := fields{
-				repo: repoMock,
-				cu:   cuMock,
-				ma:   maMock,
-				in:   inMock,
-				fu:   fuMock,
-				lo:   loMock,
-				uc:   NewUseCases(repoMock, cuMock, maMock, inMock, fuMock, loMock),
-			}
-
+			f := setupMocks(ctrl)
 			tt.setup(&f)
+
 			gotID, err := f.uc.CreateProject(tt.args.ctx, tt.args.p)
 			if tt.wantErr {
-				assert.Error(t, err)
+				assert.Error(t, err, "expected error from CreateProject")
 			} else {
-				assert.NoError(t, err)
-				assert.Equal(t, tt.wantID, gotID)
+				assert.NoError(t, err, "unexpected error from CreateProject")
+				assert.Equal(t, tt.wantID, gotID, "CreateProject: returned ID mismatch")
 			}
 		})
 	}
@@ -200,16 +208,6 @@ func TestCreateProject(t *testing.T) {
 func TestGetProject(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-
-	type fields struct {
-		repo *mocks.MockRepository
-		cu   *customer.MockUseCases
-		ma   *manager.MockUseCases
-		in   *investor.MockUseCases
-		fu   *field.MockUseCases
-		lo   *lot.MockUseCases
-		uc   UseCases
-	}
 
 	type args struct {
 		ctx context.Context
@@ -224,7 +222,7 @@ func TestGetProject(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "succes + enrich",
+			name: "success + enrich",
 			setup: func(f *fields) {
 				f.repo.EXPECT().
 					GetProject(gomock.Any(), int64(42)).
@@ -246,7 +244,7 @@ func TestGetProject(t *testing.T) {
 				f.fu.EXPECT().GetField(gomock.Any(), int64(40)).
 					Return(&fielddom.Field{ID: 40, Name: "F1"}, nil)
 			},
-			args: args{ctx: context.TODO(), id: 42},
+			args: args{ctx: context.Background(), id: 42},
 			want: &domain.Project{
 				ID:        42,
 				Name:      "P1",
@@ -263,37 +261,45 @@ func TestGetProject(t *testing.T) {
 					GetProject(gomock.Any(), int64(99)).
 					Return(nil, errors.New("not found"))
 			},
-			args:    args{ctx: context.TODO(), id: 99},
+			args:    args{ctx: context.Background(), id: 99},
+			wantErr: true,
+		},
+		{
+			name: "enrich error",
+			setup: func(f *fields) {
+				f.repo.EXPECT().GetProject(gomock.Any(), int64(42)).
+					Return(&domain.Project{
+						ID:        42,
+						Name:      "P1",
+						Customer:  customerdom.Customer{ID: 10},
+						Managers:  []managerdom.Manager{{ID: 20}},
+						Investors: []investordom.Investor{{ID: 30}},
+						Fields:    []fielddom.Field{{ID: 40}},
+					}, nil)
+
+				f.cu.EXPECT().
+					GetCustomer(gomock.Any(), int64(10)).
+					Return(nil, errors.New("customer fetch error"))
+			},
+			args:    args{ctx: context.Background(), id: 42},
 			wantErr: true,
 		},
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			repoMock := mocks.NewMockRepository(ctrl)
-			cuMock := customer.NewMockUseCases(ctrl)
-			maMock := manager.NewMockUseCases(ctrl)
-			inMock := investor.NewMockUseCases(ctrl)
-			fuMock := field.NewMockUseCases(ctrl)
-			loMock := lot.NewMockUseCases(ctrl)
+			t.Parallel()
 
-			f := fields{
-				repo: repoMock,
-				cu:   cuMock,
-				ma:   maMock,
-				in:   inMock,
-				fu:   fuMock,
-				lo:   loMock,
-				uc:   NewUseCases(repoMock, cuMock, maMock, inMock, fuMock, loMock),
-			}
-
+			f := setupMocks(ctrl)
 			tt.setup(&f)
+
 			got, err := f.uc.GetProject(tt.args.ctx, tt.args.id)
 			if tt.wantErr {
-				assert.Error(t, err)
+				assert.Error(t, err, "expected error from GetProject")
 			} else {
-				assert.NoError(t, err)
-				assert.Equal(t, tt.want, got)
+				assert.NoError(t, err, "unexpected error from GetProject")
+				assert.Equal(t, tt.want, got, "GetProject: returned project mismatch")
 			}
 		})
 	}
@@ -302,16 +308,6 @@ func TestGetProject(t *testing.T) {
 func TestListProject(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-
-	type fields struct {
-		repo *mocks.MockRepository
-		cu   *customer.MockUseCases
-		ma   *manager.MockUseCases
-		in   *investor.MockUseCases
-		fu   *field.MockUseCases
-		lo   *lot.MockUseCases
-		uc   UseCases
-	}
 
 	type args struct {
 		ctx context.Context
@@ -325,7 +321,7 @@ func TestListProject(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "succes + enrich all",
+			name: "success + enrich all",
 			setup: func(f *fields) {
 				list := []domain.Project{
 					{
@@ -361,7 +357,7 @@ func TestListProject(t *testing.T) {
 						Return(&fielddom.Field{ID: p.Fields[0].ID, Name: fmt.Sprintf("F%d", p.Fields[0].ID)}, nil)
 				}
 			},
-			args: args{ctx: context.TODO()},
+			args: args{ctx: context.Background()},
 			want: []domain.Project{
 				{ID: 1, Name: "P1",
 					Customer:  customerdom.Customer{ID: 10, Name: "C10"},
@@ -382,36 +378,53 @@ func TestListProject(t *testing.T) {
 					ListProjects(gomock.Any()).
 					Return(nil, errors.New("not found"))
 			},
-			args:    args{ctx: context.TODO()},
+			args:    args{ctx: context.Background()},
+			wantErr: true,
+		},
+		{
+			name: "enrich error - GetInvestor fails",
+			setup: func(f *fields) {
+				list := []domain.Project{
+					{
+						ID:        1,
+						Name:      "P1",
+						Customer:  customerdom.Customer{ID: 10},
+						Managers:  []managerdom.Manager{{ID: 20}},
+						Investors: []investordom.Investor{{ID: 30}},
+						Fields:    []fielddom.Field{{ID: 40}},
+					},
+				}
+				f.repo.EXPECT().
+					ListProjects(gomock.Any()).
+					Return(list, nil)
+
+				f.cu.EXPECT().GetCustomer(gomock.Any(), int64(10)).
+					Return(&customerdom.Customer{ID: 10, Name: "C10"}, nil)
+				f.ma.EXPECT().GetManager(gomock.Any(), int64(20)).
+					Return(&managerdom.Manager{ID: 20, Name: "M20"}, nil)
+				f.in.EXPECT().GetInvestor(gomock.Any(), int64(30)).
+					Return(nil, errors.New("investor fetch fail"))
+				// GetField is not called due to the previous error
+			},
+			args:    args{ctx: context.Background()},
 			wantErr: true,
 		},
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			repoMock := mocks.NewMockRepository(ctrl)
-			cuMock := customer.NewMockUseCases(ctrl)
-			maMock := manager.NewMockUseCases(ctrl)
-			inMock := investor.NewMockUseCases(ctrl)
-			fuMock := field.NewMockUseCases(ctrl)
-			loMock := lot.NewMockUseCases(ctrl)
+			t.Parallel()
 
-			f := fields{
-				repo: repoMock,
-				cu:   cuMock,
-				ma:   maMock,
-				in:   inMock,
-				fu:   fuMock,
-				lo:   loMock,
-				uc:   NewUseCases(repoMock, cuMock, maMock, inMock, fuMock, loMock),
-			}
+			f := setupMocks(ctrl)
 			tt.setup(&f)
+
 			got, err := f.uc.ListProjects(tt.args.ctx)
 			if tt.wantErr {
-				assert.Error(t, err)
+				assert.Error(t, err, "expected error from ListProjects")
 			} else {
-				assert.NoError(t, err)
-				assert.Equal(t, tt.want, got)
+				assert.NoError(t, err, "unexpected error from ListProjects")
+				assert.Equal(t, tt.want, got, "ListProjects: returned project list mismatch")
 			}
 		})
 
@@ -421,16 +434,6 @@ func TestListProject(t *testing.T) {
 func TestListProjectsByCustomerID(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-
-	type fields struct {
-		repo *mocks.MockRepository
-		cu   *customer.MockUseCases
-		ma   *manager.MockUseCases
-		in   *investor.MockUseCases
-		fu   *field.MockUseCases
-		lo   *lot.MockUseCases
-		uc   UseCases
-	}
 
 	type args struct {
 		ctx        context.Context
@@ -445,7 +448,7 @@ func TestListProjectsByCustomerID(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "sucess + enrich",
+			name: "success + enrich",
 			setup: func(f *fields) {
 				list := []domain.Project{
 					{ID: 1, Name: "A",
@@ -464,7 +467,7 @@ func TestListProjectsByCustomerID(t *testing.T) {
 				f.in.EXPECT().GetInvestor(gomock.Any(), int64(9)).Return(&investordom.Investor{ID: 9, Name: "I9"}, nil)
 				f.fu.EXPECT().GetField(gomock.Any(), int64(11)).Return(&fielddom.Field{ID: 11, Name: "F11"}, nil)
 			},
-			args: args{ctx: context.TODO(), customerID: 5},
+			args: args{ctx: context.Background(), customerID: 5},
 			want: []domain.Project{
 				{ID: 1, Name: "A",
 					Customer:  customerdom.Customer{ID: 5, Name: "C5"},
@@ -478,37 +481,47 @@ func TestListProjectsByCustomerID(t *testing.T) {
 			setup: func(f *fields) {
 				f.repo.EXPECT().ListProjectsByCustomerID(gomock.Any(), int64(99)).Return(nil, errors.New("not found"))
 			},
-			args:    args{ctx: context.TODO(), customerID: 99},
+			args:    args{ctx: context.Background(), customerID: 99},
+			wantErr: true,
+		},
+		{
+			name: "enrich error - GetField fails",
+			setup: func(f *fields) {
+				list := []domain.Project{
+					{ID: 1, Name: "A",
+						Customer:  customerdom.Customer{ID: 5},
+						Managers:  []managerdom.Manager{{ID: 7}},
+						Investors: []investordom.Investor{{ID: 9}},
+						Fields:    []fielddom.Field{{ID: 11}}},
+				}
+				f.repo.EXPECT().
+					ListProjectsByCustomerID(gomock.Any(), int64(5)).
+					Return(list, nil)
+
+				f.cu.EXPECT().GetCustomer(gomock.Any(), int64(5)).Return(&customerdom.Customer{ID: 5, Name: "C5"}, nil)
+				f.ma.EXPECT().GetManager(gomock.Any(), int64(7)).Return(&managerdom.Manager{ID: 7, Name: "M7"}, nil)
+				f.in.EXPECT().GetInvestor(gomock.Any(), int64(9)).Return(&investordom.Investor{ID: 9, Name: "I9"}, nil)
+				f.fu.EXPECT().GetField(gomock.Any(), int64(11)).Return(nil, errors.New("field not found"))
+			},
+			args:    args{ctx: context.Background(), customerID: 5},
 			wantErr: true,
 		},
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			repoMock := mocks.NewMockRepository(ctrl)
-			cuMock := customer.NewMockUseCases(ctrl)
-			maMock := manager.NewMockUseCases(ctrl)
-			inMock := investor.NewMockUseCases(ctrl)
-			fuMock := field.NewMockUseCases(ctrl)
-			loMock := lot.NewMockUseCases(ctrl)
+			t.Parallel()
 
-			f := fields{
-				repo: repoMock,
-				cu:   cuMock,
-				ma:   maMock,
-				in:   inMock,
-				fu:   fuMock,
-				lo:   loMock,
-				uc:   NewUseCases(repoMock, cuMock, maMock, inMock, fuMock, loMock),
-			}
-
+			f := setupMocks(ctrl)
 			tt.setup(&f)
+
 			got, err := f.uc.ListProjectsByCustomerID(tt.args.ctx, tt.args.customerID)
 			if tt.wantErr {
-				assert.Error(t, err)
+				assert.Error(t, err, "expected error from ListProjectsByCustomerID")
 			} else {
-				assert.NoError(t, err)
-				assert.Equal(t, tt.want, got)
+				assert.NoError(t, err, "unexpected error from ListProjectsByCustomerID")
+				assert.Equal(t, tt.want, got, "ListProjectsByCustomerID: returned project list mismatch")
 			}
 		})
 	}
@@ -534,13 +547,13 @@ func TestUpdateProject(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "succes",
+			name: "success",
 			setup: func(f *fields) {
 				f.repo.EXPECT().
 					UpdateProject(gomock.Any(), &domain.Project{ID: 1, Name: "P2"}).
 					Return(nil)
 			},
-			args: args{ctx: context.TODO(), p: &domain.Project{ID: 1, Name: "P2"}},
+			args: args{ctx: context.Background(), p: &domain.Project{ID: 1, Name: "P2"}},
 		},
 		{
 			name: "error",
@@ -548,23 +561,27 @@ func TestUpdateProject(t *testing.T) {
 				f.repo.EXPECT().UpdateProject(gomock.Any(), gomock.Any()).
 					Return(errors.New("update failed"))
 			},
-			args:    args{ctx: context.TODO(), p: &domain.Project{ID: 1, Name: "P3"}},
+			args:    args{ctx: context.Background(), p: &domain.Project{ID: 1, Name: "P3"}},
 			wantErr: true,
 		},
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			repoMock := mocks.NewMockRepository(ctrl)
+
 			uc := NewUseCases(repoMock, nil, nil, nil, nil, nil)
 			f := fields{repo: repoMock, uc: uc}
-
 			tt.setup(&f)
+
 			err := f.uc.UpdateProject(tt.args.ctx, tt.args.p)
 			if tt.wantErr {
 				assert.Error(t, err, "expected error from UpdateProject")
 			} else {
-				assert.NoError(t, err, "expected no error from UpdateProject")
+				assert.NoError(t, err, "unexpected error from UpdateProject")
 			}
 		})
 	}
@@ -596,7 +613,7 @@ func TestDeleteProject(t *testing.T) {
 				f.repo.EXPECT().DeleteProject(gomock.Any(), int64(10)).
 					Return(nil)
 			},
-			args: args{ctx: context.TODO(), id: 10},
+			args: args{ctx: context.Background(), id: 10},
 		},
 		{
 			name: "repo error",
@@ -604,23 +621,27 @@ func TestDeleteProject(t *testing.T) {
 				f.repo.EXPECT().DeleteProject(gomock.Any(), gomock.Any()).
 					Return(errors.New("delete fail"))
 			},
-			args:    args{ctx: context.TODO(), id: 99},
+			args:    args{ctx: context.Background(), id: 99},
 			wantErr: true,
 		},
 	}
 
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			repoMock := mocks.NewMockRepository(ctrl)
 			uc := NewUseCases(repoMock, nil, nil, nil, nil, nil)
-			f := fields{repo: repoMock, uc: uc}
 
+			f := fields{repo: repoMock, uc: uc}
 			tt.setup(&f)
+
 			err := f.uc.DeleteProject(tt.args.ctx, tt.args.id)
 			if tt.wantErr {
 				assert.Error(t, err, "expected error from DeleteProject")
 			} else {
-				assert.NoError(t, err, "expected no error from DeleteProject")
+				assert.NoError(t, err, "unexpected error from DeleteProject")
 			}
 		})
 	}
