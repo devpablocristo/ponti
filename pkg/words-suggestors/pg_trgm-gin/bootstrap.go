@@ -1,7 +1,7 @@
 package pkgsuggester
 
 // Bootstrap receives parameters, configures, creates and starts the suggestion engine.
-func Bootstrap(dsn, table, column string) error { //(Suggester, error) {
+func Bootstrap(dsn, table, column string) (Suggester, error) {
 	// 1. Build configuration from args and env
 	opts := []Option{}
 	if dsn != "" {
@@ -20,6 +20,5 @@ func Bootstrap(dsn, table, column string) error { //(Suggester, error) {
 	}
 
 	// 2. Create and start engine
-	//return newEngine(cfg)
-	return nil
+	return newEngine(cfg)
 }
