@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/devpablocristo/ponti/pkg/words-suggestors/pg_trgm-gin"
+	pkgsuggester "github.com/alphacodinggroup/ponti-backend/pkg/words-suggestors/pg_trgm-gin"
 )
 
 func main() {
