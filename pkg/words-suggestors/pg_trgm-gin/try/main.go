@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-
-	"github.com/devpablocristo/ponti/pkg/words-suggestors/pg_trgm-gin"
 )
 
 func main() {
