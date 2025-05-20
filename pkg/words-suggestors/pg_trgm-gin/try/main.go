@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	pkgsuggester "github.com/alphacodinggroup/ponti-backend/pkg/words-suggestors/pg_trgm-gin"
 )
 
 func main() {
