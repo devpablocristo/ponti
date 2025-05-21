@@ -18,13 +18,15 @@ import (
 type Handler struct {
 	ucs UseCases
 	gsv gsv.Server
+	sgt Suggester
 	mws *mdw.Middlewares
 }
 
 // NewHandler crea un nuevo handler de Customer.
-func NewHandler(s gsv.Server, u UseCases, m *mdw.Middlewares) *Handler {
+func NewHandler(s gsv.Server, u UseCases, sgt Suggester, m *mdw.Middlewares) *Handler {
 	return &Handler{
 		ucs: u,
+		sgt: sgt,
 		gsv: s,
 		mws: m,
 	}
@@ -41,11 +43,12 @@ func (h *Handler) Routes() {
 
 	public := router.Group(publicPrefix)
 	{
-		public.POST("", h.CreateCustomer)       // Crear un customer
-		public.GET("", h.ListCustomers)         // Listar todos los customers
-		public.GET("/:id", h.GetCustomer)       // Obtener un customer por ID
-		public.PUT("/:id", h.UpdateCustomer)    // Actualizar un customer
-		public.DELETE("/:id", h.DeleteCustomer) // Eliminar un customer
+		public.POST("", h.CreateCustomer)           // Crear un customer
+		public.GET("", h.ListCustomers)             // Listar todos los customers
+		public.GET("/:id", h.GetCustomer)           // Obtener un customer por ID
+		public.PUT("/:id", h.UpdateCustomer)        // Actualizar un customer
+		public.DELETE("/:id", h.DeleteCustomer)     // Eliminar un customer
+		public.GET("/suggest", h.SuggesterCustomer) // obtiene customer mediante una query
 	}
 
 	// Rutas protegidas.
@@ -148,4 +151,21 @@ func (h *Handler) DeleteCustomer(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, types.MessageResponse{Message: "Customer deleted successfully"})
+}
+
+func (h *Handler) SuggesterCustomer(c *gin.Context) {
+	query := c.Query("query")
+	if query == "" {
+		c.JSON(http.StatusBadRequest, types.ErrorResponse{Error: "missing query param"})
+		return
+	}
+
+	result, err := h.sgt.Suggest(c.Request.Context(), query)
+	if err != nil {
+		apiErr, _ := types.NewAPIError(err)
+		c.Error(apiErr).SetMeta(map[string]any{"details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"result": result})
 }
