@@ -21,6 +21,6 @@ func ProvideCustomerUseCases(repo customer.Repository) customer.UseCases {
 	return customer.NewUseCases(repo)
 }
 
-func ProvideCustomerHandler(server ginsrv.Server, usecases customer.UseCases, middlewares *mdw.Middlewares) *customer.Handler {
-	return customer.NewHandler(server, usecases, middlewares)
+func ProvideCustomerHandler(server ginsrv.Server, usecases customer.UseCases, suggester customer.Suggester, middlewares *mdw.Middlewares) *customer.Handler {
+	return customer.NewHandler(server, usecases, suggester, middlewares)
 }

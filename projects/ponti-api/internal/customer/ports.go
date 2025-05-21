@@ -23,3 +23,8 @@ type Repository interface {
 	UpdateCustomer(ctx context.Context, c *domain.Customer) error
 	DeleteCustomer(ctx context.Context, id int64) error
 }
+
+// Suggester define la interfaz para sugerencias.
+type Suggester interface {
+	Suggest(ctx context.Context, query string) ([]string, error)
+}
